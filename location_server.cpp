@@ -77,3 +77,13 @@ bool requesting_func(dashgo_location::applicate::Request &req, dashgo_locatio
         res.feedback = "The record saves successdfully.\n";  
         return true;  
 }  
+
+int main(int argc, char** argv)  
+{  
+        ros::init(argc, argv, "location_server");  
+        ros::NodeHandle Nh;  
+    ROS_INFO("The location_server has started!");  
+        ros::ServiceServer service = Nh.advertiseService("location_manager", requesting_func);  
+        ros::spin();  
+        return 0;  
+} 
