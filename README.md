@@ -8,8 +8,9 @@ Therefore, we think that we can further develop the navigation system in this as
 3.5.2 Function optimization of autonomous navigation system - map location storage management and quick retrieval
 We plan to build a database capable of storing location pose data. Using jsoncpp, generate a JSON file and store the location data in it when we want. This storage can be to record the current position of the chassis, or to enter any coordinates we like. We use certain database storage and retrieval technology to manage our existing location information.
 When navigating, we only need to enter the location name we prepared earlier, and the corresponding location information can be published to move_base_simple/goal. This is the map location storage management and quick recall function we hope to achieve. This is the basis for navigation technology to further improve operability.
-In order to realize this function, we added four new nodes in ROS: real-time location publishing node, location information storage node, storage location request node and target coordinate publishing node. All detailed codes are stored in Appendix A.
-
+In order to realize this function!
+, we added four new nodes in ROS: real-time location publishing node, location information storage node, storage location request node and target coordinate publishing node. All detailed codes are stored in Appendix A.
+[图片1](https://user-images.githubusercontent.com/55082714/205218716-492ac2b8-a8e4-4276-a780-4676a87fb925.png)
 3.5.3 Real-time location publishing node - location_scouts
 As mentioned above, the amcl algorithm function that comes with the chassis is used for self-positioning. The AMCL algorithm is in our imagination and runs with the movement of the chassis. We know that there is a topic in amcl, "amcl_pose". The message format of this topic is "geometry_msgs/PoseWithCovarianceStamped". In this topic, as long as the chassis is displaced, new pose information will be released.
 Since we need to store the current pose data, we use AMCL's amcl_pose to obtain the current pose data of the chassis. We create the node location_scouts, subscribe to the topic amcl_pose, and extract the three most important location information: abscissa x, ordinate y and angle w.
